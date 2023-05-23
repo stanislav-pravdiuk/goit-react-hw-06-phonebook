@@ -5,6 +5,7 @@ import initialContacts from '../components/contacts/contacts.json';
 import ContactForm from "./phonebook/contactForm";
 import ContactList from "./contacts/ContactsList";
 import Filter from "./contacts/Filter";
+import { Counter } from "./counter";
 
 function App() {
   const [contacts, setContacts] = useState(initialContacts);
@@ -60,6 +61,8 @@ function App() {
       <Filter filter={filter} onChange={handleFilterChange} />
 
       <ContactList contacts={visibleContacts} onDeleteContact={deleteContact} />
+
+      <Counter/>
 
     </div>
   );
