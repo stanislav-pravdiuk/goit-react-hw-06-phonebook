@@ -1,24 +1,20 @@
-import { useState, useEffect } from "react";
-import { nanoid } from 'nanoid';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import initialContacts from '../components/contacts/contacts.json';
+// import { useState, useEffect } from "react";
 import ContactForm from "./phonebook/contactForm";
 import ContactList from "./contacts/ContactsList";
 import Filter from "./contacts/Filter";
 import { useSelector, useDispatch } from "react-redux";
-import { createContact, removeContact } from "./redux/contacts/contactsSlice";
-import { setFilter } from "./redux/contacts/contactsSlice";
+import { createContact, removeContact, setFilter } from "./redux/contacts/contactsSlice";
 
 function App() {
 
-  const contacts = useSelector(state => state.contacts.contacts);
-  const filter = useSelector(state => state.contacts.filter);
+  const { contacts } = useSelector(state => state);
+  const { filter } = useSelector(state => state);
 
-  const dispatch = useDispatch()
-  // const [contacts, setContacts] = useState(initialContacts);
-  // const [filter, setFilter] = useState('');
-  // const visibleContacts = contacts.filter(contact =>
-  //   contact.name.toLowerCase().includes(filter.toLowerCase()));
+  const dispatch = useDispatch();
+
+  const visibleContacts = contacts
+    .filter(contact => contact.name.toLowerCase()
+    .includes(filter.toLowerCase()));
 
   // useEffect(() => {
   //   const storedContacts = localStorage.getItem('contacts');
@@ -32,7 +28,6 @@ function App() {
   // }, [contacts]);
 
   function deleteContact(contactId) {
-  //   setContacts(state => state.filter(contact => contactId !== contact.id));
     dispatch(removeContact(contactId));
   };
 
@@ -41,8 +36,7 @@ function App() {
   };
 
   function handleFilterChange(event) {
-  //   setFilter(event.currentTarget.value);
-    dispatch(setFilter(event))
+    dispatch(setFilter(event));
   };
 
   return (
@@ -63,7 +57,8 @@ function App() {
       <h2>Contacts</h2>
       <Filter filter={filter} onChange={handleFilterChange} />
 
-      {/* <ContactList contacts={visibleContacts} onDeleteContact={deleteContact} /> */}
+      {/* <ContactList contacts={contacts} onDeleteContact={deleteContact}/> */}
+      <ContactList contacts={visibleContacts} onDeleteContact={deleteContact} />
 
     </div>
   );

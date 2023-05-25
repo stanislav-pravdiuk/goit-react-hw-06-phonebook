@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import contacts from '../../contacts/contacts.json';
 import { nanoid } from "@reduxjs/toolkit";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import contacts from '../../contacts/contacts.json';
 
 export const contactsSlice = createSlice({
     name: 'contacts',
@@ -17,7 +17,7 @@ export const contactsSlice = createSlice({
         },
 
         removeContact(state, action) {
-            return state.filter(contact => action.payload.id !== contact.id)
+            return state.filter(contact => action.payload !== contact.id)
         }
 
     }
@@ -29,7 +29,7 @@ export const filterSlice = createSlice({
     reducers: {
 
         setFilter(state, action) {
-            alert('work')
+            return action.payload.target.value;
         },
 
     }
