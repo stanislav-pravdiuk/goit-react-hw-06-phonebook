@@ -5,13 +5,15 @@ import initialContacts from '../components/contacts/contacts.json';
 import ContactForm from "./phonebook/contactForm";
 import ContactList from "./contacts/ContactsList";
 import Filter from "./contacts/Filter";
-import { Counter } from "./counter";
 import { useSelector, useDispatch } from "react-redux";
+import { createContact, removeContact } from "./redux/contacts/contactsSlice";
+import { setFilter } from "./redux/contacts/contactsSlice";
 
 function App() {
 
-  const state = useSelector(state => state);
-  console.log(state)
+  const contacts = useSelector(state => state.contacts.contacts);
+  const filter = useSelector(state => state.contacts.filter);
+
   const dispatch = useDispatch()
   // const [contacts, setContacts] = useState(initialContacts);
   // const [filter, setFilter] = useState('');
@@ -29,25 +31,19 @@ function App() {
   //   localStorage.setItem('contacts', JSON.stringify(contacts));
   // }, [contacts]);
 
-  // function deleteContact(contactId) {
+  function deleteContact(contactId) {
   //   setContacts(state => state.filter(contact => contactId !== contact.id));
-  // };
-
-  function addContact (data) {
-    // if (contacts.some(contact => contact.name === data.name)) {
-    //   Notify.warning(`${data.name} is already in contacts`)
-    //   return;
-    // }
-    // const id = nanoid();
-    // const contact = { id: id, name: data.name, number: data.number };
-    // setContacts(state => [contact, ...state]);
-
-    // dispatch(createContact(data))
+    dispatch(removeContact(contactId));
   };
 
-  // function handleFilterChange(event) {
+  function addContact (data) {
+    dispatch(createContact(data));
+  };
+
+  function handleFilterChange(event) {
   //   setFilter(event.currentTarget.value);
-  // };
+    dispatch(setFilter(event))
+  };
 
   return (
     <div
@@ -64,12 +60,10 @@ function App() {
       <h1>Phonebook</h1>
       <ContactForm onSubmit={addContact} />
 
-      {/* <h2>Contacts</h2> */}
-      {/* <Filter filter={filter} onChange={handleFilterChange} /> */}
+      <h2>Contacts</h2>
+      <Filter filter={filter} onChange={handleFilterChange} />
 
       {/* <ContactList contacts={visibleContacts} onDeleteContact={deleteContact} /> */}
-
-      {/* <Counter/> */}
 
     </div>
   );
