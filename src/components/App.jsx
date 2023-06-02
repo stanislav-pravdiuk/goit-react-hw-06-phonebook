@@ -13,8 +13,8 @@ function App() {
   const dispatch = useDispatch();
 
   const visibleContacts = contacts
-    .filter(contact => contact.name.toLowerCase()
-    .includes(filter.toLowerCase()));
+    // .filter(contact => contact.name.toLowerCase()
+    // .includes(filter.toLowerCase()));
 
   // useEffect(() => {
   //   const storedContacts = localStorage.getItem('contacts');
