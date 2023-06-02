@@ -1,12 +1,10 @@
-export const getPhoneBookItems = state => state.contacts.contacts; 
+export const getPhoneBookItems = state => state.contacts.contacts[0]; 
 
 export const getContactsFilter = state => state.filter.filter;
-// зачем єкспорт?
+
 export const getFilteredContacts = state => {
     const contacts = getPhoneBookItems(state);
     const filter = getContactsFilter(state);
     const getFilteredContacts = contacts.filter(item => item.name.includes(filter));
     return getFilteredContacts;
 };
-
-
