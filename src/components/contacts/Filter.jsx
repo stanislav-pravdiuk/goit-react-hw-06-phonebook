@@ -1,7 +1,7 @@
 import React from "react";
 import css from './filter.module.css'
 import { useDispatch, useSelector } from "react-redux";
-import { getFilteredContacts, getContactsFilter } from "components/redux/selectors";
+import { getContactsFilter } from "components/redux/selectors";
 // import PropTypes from 'prop-types';
 import { filterContacts } from "components/redux/filterSlice";
 
