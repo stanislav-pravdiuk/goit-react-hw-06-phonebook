@@ -1,6 +1,6 @@
 import { useState } from "react";
 import css from './contact-form.module.css';
-import { addContact } from "components/redux/contactsSlice";
+import { addContact } from "redux/contactsSlice";
 import { useDispatch } from "react-redux";
 import { nanoid } from "nanoid";
 
