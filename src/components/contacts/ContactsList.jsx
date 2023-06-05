@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getPhoneBookItems, getFilteredContacts } from "components/redux/selectors";
+import { getFilteredContacts } from "components/redux/selectors";
 import { deleteContact } from "components/redux/contactsSlice";
 
 function ContactList() {
@@ -11,9 +11,9 @@ function ContactList() {
         return (
                 <ul>
                         {contacts.map((el) =>
-                                <li key={el.name}>
+                                <li key={el.id}>
                                         <span>{el.name} {el.number}</span>
-                                        <button onClick={() => dispatch(deleteContact(el.name))}>Delete</button>
+                                        <button onClick={() => dispatch(deleteContact(el.id))}>Delete</button>
                                 </li>)}
                 </ul>
         );
